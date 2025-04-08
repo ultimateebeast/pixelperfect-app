@@ -1,0 +1,40 @@
+{
+  "name": "Main Frame",
+  "type": "FRAME",
+  "children": [
+    {
+      "type": "TEXT",
+      "name": "Title",
+      "characters": "Welcome to PixelPerfect"
+    },
+    {
+      "type": "FRAME",
+      "name": "Card Container",
+      "children": [
+        {
+          "type": "RECTANGLE",
+          "name": "Image Placeholder"
+        },
+        {
+          "type": "TEXT",
+          "name": "Description",
+          "characters": "This is a powerful tool for converting your Figma designs into code."
+        }
+      ]
+    },
+    {
+      "type": "GROUP",
+      "name": "Button Group",
+      "children": [
+        {
+          "type": "RECTANGLE",
+          "name": "Primary Button"
+        },
+        {
+          "type": "RECTANGLE",
+          "name": "Secondary Button"
+        }
+      ]
+    }
+  ]
+}
