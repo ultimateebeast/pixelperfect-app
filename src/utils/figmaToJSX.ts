@@ -1,14 +1,20 @@
+import { generateSmartComponentName } from "./smartNameGenerator";
+// adjust the path if needed, depending on your project structure
+
 type FigmaNode = {
+  id: string;
   name: string;
   type: string;
   layoutMode?: "VERTICAL" | "HORIZONTAL";
   children?: FigmaNode[];
   characters?: string;
+  parent?: string; // Add this for hierarchy
   absoluteBoundingBox?: {
     width: number;
     height: number;
   };
 };
+
 
 export function figmaNodeToJSX(node: FigmaNode): string {
   switch (node.type) {
@@ -50,7 +56,9 @@ export function figmaNodeToJSX(node: FigmaNode): string {
           ? "flex flex-row"
           : "";
 
-      return `<div className="${layout} gap-4">
+      const componentName = generateSmartComponentName(node.name, node.type);
+
+      return `<div className="${layout} gap-4" data-component="${componentName}">
   ${(node.children || []).map((child) => figmaNodeToJSX(child)).join("\n  ")}
 </div>`;
 
