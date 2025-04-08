@@ -1,38 +1,39 @@
 {
-  "name": "Main Frame",
+  "name": "CardComponent",
   "type": "FRAME",
   "children": [
     {
-      "type": "TEXT",
-      "name": "Title",
-      "characters": "Welcome to PixelPerfect"
+      "type": "RECTANGLE",
+      "name": "Image Placeholder"
     },
     {
-      "type": "FRAME",
-      "name": "Card Container",
+      "type": "GROUP",
+      "name": "TextBlock",
       "children": [
         {
-          "type": "RECTANGLE",
-          "name": "Image Placeholder"
+          "type": "TEXT",
+          "name": "Title",
+          "characters": "Introducing PixelPerfect"
         },
         {
           "type": "TEXT",
           "name": "Description",
-          "characters": "This is a powerful tool for converting your Figma designs into code."
+          "characters": "Automatically convert your Figma designs into clean, responsive React code."
         }
       ]
     },
     {
-      "type": "GROUP",
-      "name": "Button Group",
+      "type": "FRAME",
+      "name": "ButtonFrame",
       "children": [
         {
           "type": "RECTANGLE",
-          "name": "Primary Button"
+          "name": "Button Background"
         },
         {
-          "type": "RECTANGLE",
-          "name": "Secondary Button"
+          "type": "TEXT",
+          "name": "Button Text",
+          "characters": "Get Started"
         }
       ]
     }

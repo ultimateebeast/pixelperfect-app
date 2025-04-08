@@ -28,7 +28,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-blue-400">
       <div className="max-w-3xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-10">
           Frequently Asked Questions
@@ -37,7 +37,7 @@ export default function FaqSection() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border rounded-lg p-4 bg-white shadow-sm transition hover:shadow-md">
+              className="border rounded-lg p-4 bg-blue shadow-sm transition hover:shadow-md">
               <button
                 onClick={() => toggle(index)}
                 className="flex justify-between items-center w-full text-left font-medium text-lg">

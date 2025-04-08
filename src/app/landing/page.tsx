@@ -4,6 +4,7 @@
 import PageWrapper from "@/components/layout/PageWrapper";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function LandingPage() {
   return (
@@ -30,7 +31,9 @@ export default function LandingPage() {
             We transform beautiful designs from Figma into clean, responsive,
             and scalable React code.
           </p>
-          <Button onClick={() => alert("Start building!")}>Start Now</Button>
+          <Link href="/tools" className="inline-block">
+            <Button onClick={() => alert("Start building!")}>Start Now</Button>
+          </Link>
         </div>
       </SectionWrapper>
     </PageWrapper>
