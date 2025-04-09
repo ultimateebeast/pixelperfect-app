@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   return (
@@ -7,7 +10,8 @@ export default function Header() {
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white tracking-tight">
           PixelPerfect
         </h1>
-        <nav className="space-x-6 text-gray-600 dark:text-gray-300 text-sm font-medium">
+
+        <nav className="space-x-6 text-gray-600 dark:text-gray-300 text-sm font-medium flex items-center">
           <Link
             href="/"
             className="hover:text-black dark:hover:text-white transition-colors duration-200">
@@ -23,6 +27,25 @@ export default function Header() {
             className="hover:text-black dark:hover:text-white transition-colors duration-200">
             Tools
           </Link>
+
+          {/* Signed-in user */}
+          <SignedIn>
+            <Link
+              href="/profile"
+              className="hover:text-black dark:hover:text-white transition-colors duration-200">
+              Profile
+            </Link>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+
+          {/* Not signed in */}
+          <SignedOut>
+            <Link
+              href="/sign-in"
+              className="hover:text-black dark:hover:text-white transition-colors duration-200">
+              Sign In
+            </Link>
+          </SignedOut>
         </nav>
       </div>
     </header>

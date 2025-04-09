@@ -2,15 +2,17 @@
   "document": {
     "children": [
       {
+        "id": "1",
         "type": "FRAME",
         "name": "Hero Section",
-        "layoutMode": "VERTICAL",
         "children": [
           {
+            "id": "1-1",
             "type": "TEXT",
             "characters": "Welcome to PixelPerfect"
           },
           {
+            "id": "1-2",
             "type": "RECTANGLE",
             "absoluteBoundingBox": {
               "width": 300,
@@ -20,11 +22,13 @@
         ]
       },
       {
+        "id": "2",
         "type": "FRAME",
         "name": "CTA Button",
         "layoutMode": "HORIZONTAL",
         "children": [
           {
+            "id": "2-1",
             "type": "TEXT",
             "characters": "Get Started"
           }

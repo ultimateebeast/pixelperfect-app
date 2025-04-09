@@ -9,13 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.29.1",
+    "@floating-ui/react": "^0.27.6",
+    "@floating-ui/react-dom-interactions": "^0.13.3",
+    "@react-hookz/web": "^25.1.0",
+    "@tippyjs/react": "^4.2.6",
     "clsx": "^2.1.1",
     "file-saver": "^2.0.5",
+    "framer-motion": "^12.6.3",
     "motion": "^12.6.3",
     "next": "15.2.4",
-    "react": "^19.0.0",
+    "react": "^18.3.1",
     "react-copy-to-clipboard": "^5.1.0",
-    "react-dom": "^19.0.0",
+    "react-dom": "^18.3.1",
+    "react-draggable": "^4.4.6",
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {

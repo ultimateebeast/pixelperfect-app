@@ -1,4 +1,4 @@
-import { FigmaNode } from "./figmaTypes";
+import { FigmaNode } from "./figmaNode";
 
 export function extractHierarchy(node: FigmaNode): any {
   return {
