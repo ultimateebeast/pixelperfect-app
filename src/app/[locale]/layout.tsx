@@ -1,14 +1,16 @@
 // app/[locale]/layout.tsx
+import { ReactNode } from "react";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { notFound } from "next/navigation";
 
-export default function LocaleLayout({
-  children,
-  params: { locale },
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
+type LocaleLayoutProps = {
+  children: ReactNode;
+  params: {
+    locale: string;
+  };
+};
+
+export default function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const messages = useMessages();
 
   if (!messages) {
@@ -16,9 +18,9 @@ export default function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
+    <html lang={params.locale}>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider locale={params.locale} messages={messages}>
           {children}
         </NextIntlClientProvider>
       </body>
