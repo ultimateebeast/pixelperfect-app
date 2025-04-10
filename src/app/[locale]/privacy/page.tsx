@@ -1,10 +1,10 @@
 // src/app/[locale]/privacy/page.tsx
-import { useTranslations } from "next-intl";
+
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export default function PrivacyPage() {
-  const t = useTranslations("privacy");
+
 
   return (
     <>

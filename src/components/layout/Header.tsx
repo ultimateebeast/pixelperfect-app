@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
@@ -9,11 +10,18 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
         {/* Logo/Brand Name */}
         <h1 className="text-2xl font-bold text-neutral-900 dark:text-white tracking-tight font-[Inter] flex items-center gap-2">
-    <Link href="/" className="flex items-center gap-2">
-      <img src="/Pixel.svg" alt="PixelPerfect Logo" className="w-8 h-8" />
-      PixelPerfect
-    </Link>
-  </h1>
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/Pixel.svg"
+              alt="PixelPerfect Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8"
+              priority
+            />
+            PixelPerfect
+          </Link>
+        </h1>
 
         {/* Navigation Links */}
         <nav className="space-x-6 text-neutral-700 dark:text-neutral-300 text-sm font-medium flex items-center">

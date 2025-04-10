@@ -1,5 +1,4 @@
 import { generateSmartComponentName } from "./smartNameGenerator";
-// adjust the path if needed, depending on your project structure
 
 type FigmaNode = {
   id: string;
@@ -8,13 +7,31 @@ type FigmaNode = {
   layoutMode?: "VERTICAL" | "HORIZONTAL";
   children?: FigmaNode[];
   characters?: string;
-  parent?: string; // Add this for hierarchy
+  parent?: string;
   absoluteBoundingBox?: {
     width: number;
     height: number;
   };
 };
 
+type FigmaFile = {
+  document: {
+    children: FigmaNode[];
+  };
+  type: string;
+};
+
+type FigmaJSON = FigmaNode | FigmaFile;
+
+// ✅ Strict type guard with no `any`
+function isFigmaFile(obj: FigmaJSON): obj is FigmaFile {
+  return (
+    "document" in obj &&
+    obj.document !== undefined &&
+    "children" in obj.document &&
+    Array.isArray(obj.document.children)
+  );
+}
 
 export function figmaNodeToJSX(node: FigmaNode): string {
   switch (node.type) {
@@ -72,25 +89,15 @@ export function figmaNodeToJSX(node: FigmaNode): string {
   }
 }
 
-type FigmaDocument = {
-  document?: {
-    children?: FigmaNode[];
-  };
-  type?: string;
-};
-
-export function generateJSXFromFigma(json: any): string {
+export function generateJSXFromFigma(json: FigmaJSON): string {
   let body = "";
 
-  if (json.document?.children?.length) {
-    // Traverse all top-level nodes under the document
+  if (isFigmaFile(json)) {
     body = json.document.children
-      .map((node: FigmaNode) => figmaNodeToJSX(node))
+      .map((node) => figmaNodeToJSX(node))
       .join("\n\n");
-  } else if (json.type && typeof json.type === "string") {
-    body = figmaNodeToJSX(json);
   } else {
-    return "// Invalid Figma JSON";
+    body = figmaNodeToJSX(json);
   }
 
   return `import React from "react";

@@ -16,6 +16,7 @@ export default function FigmaConverter() {
       const jsx = generateJSXFromFigma(data);
       setJsxCode(jsx);
     } catch (err) {
+      console.error("Something went wrong:", err);
       alert("Failed to convert Figma file.");
     } finally {
       setLoading(false);

@@ -7,7 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export default function FigmaUploader() {
-  const [fileName, setFileName] = useState("");
+  const [fileName, setFileName] = useState("GeneratedComponent.tsx");
   const [jsonPreview, setJsonPreview] = useState("");
   const [generatedJSX, setGeneratedJSX] = useState("");
   const [figmaKey, setFigmaKey] = useState("");
@@ -17,7 +17,7 @@ export default function FigmaUploader() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setFileName(file.name);
+    setFileName(file.name.replace(/\.json$/, ".tsx"));
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -25,7 +25,8 @@ export default function FigmaUploader() {
         const json = JSON.parse(reader.result as string);
         setJsonPreview(JSON.stringify(json, null, 2));
         setGeneratedJSX(generateJSXFromFigma(json));
-      } catch (_) {
+      } catch (err) {
+        console.error("Something went wrong:", err);
         alert("Invalid JSON file");
       }
     };
@@ -43,9 +44,21 @@ export default function FigmaUploader() {
 
       setJsonPreview(JSON.stringify(data, null, 2));
       setGeneratedJSX(generateJSXFromFigma(data));
-    } catch (err: any) {
-      alert("Error fetching Figma file: " + err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert("Error fetching Figma file: " + err.message);
+      } else {
+        alert("Unknown error occurred while fetching Figma file.");
+      }
     }
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([generatedJSX], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName || "GeneratedComponent.tsx";
+    link.click();
   };
 
   return (
@@ -142,9 +155,25 @@ export default function FigmaUploader() {
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                     ⚙️ Generated JSX Code
                   </h3>
+                  <input
+                    type="text"
+                    value={fileName}
+                    onChange={(e) => setFileName(e.target.value)}
+                    placeholder="Enter file name"
+                    className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-gray-900 dark:text-white mb-3"
+                  />
+
                   <pre className="bg-black/90 text-yellow-300 text-sm p-4 rounded-xl overflow-auto max-h-80 whitespace-pre-wrap">
                     {generatedJSX}
                   </pre>
+
+                  <motion.button
+                    onClick={handleDownload}
+                    whileTap={{ scale: 0.97 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="mt-4 px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg font-medium transition">
+                    ⬇️ Download JSX
+                  </motion.button>
                 </div>
               </motion.div>
             )}
