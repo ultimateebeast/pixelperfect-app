@@ -14,8 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pixel Perfect",
-  description: "Pixel Perfect",
+  title: "PixelPerfect",
+  description: "Transform Figma designs into pixel-perfect React code.",
+  icons: {
+    icon: "/Pixel.svg", // make sure this exists in your /public folder
+  },
+  themeColor: "#000000", // for mobile status bar
 };
 
 export default function RootLayout({
@@ -26,8 +30,14 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <link rel="icon" href="/Pixel.svg" type="image/svg+xml" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+        </head>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-white dark:bg-neutral-950 transition-colors duration-300`}
+        >
           {children}
         </body>
       </html>

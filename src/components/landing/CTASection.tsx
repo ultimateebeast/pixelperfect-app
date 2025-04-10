@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 
 export default function CtaSection() {
   return (
+    
     <motion.section
       className="py-40 bg-black text-white text-center flex flex-col justify-center items-center"
       initial={{ opacity: 0, y: 30 }}
@@ -23,7 +24,7 @@ export default function CtaSection() {
           Convert your Figma files into responsive code effortlessly and bring
           your designs to life.
         </p>
-
+        
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link href="/landing">
             <button className="bg-white text-blue-600 font-semibold px-12 py-4 rounded-lg shadow-xl hover:bg-gray-100 transition-all duration-300 text-xl uppercase">

@@ -5,7 +5,7 @@ import StarBackground from "../ui/StarBackground";
 export default function HeroSection() {
   return (
     <section className="relative h-screen bg-black text-white overflow-hidden flex items-center justify-center">
-      <StarBackground /> {/* Magical starry background */}
+      <StarBackground />
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}

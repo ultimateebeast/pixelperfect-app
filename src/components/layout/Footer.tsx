@@ -10,7 +10,7 @@ export default function Footer() {
           Home
         </Link>
         <Link
-          href="/about"
+          href="/landing"
           className="hover:text-black dark:hover:text-white transition-colors duration-200">
           About
         </Link>
