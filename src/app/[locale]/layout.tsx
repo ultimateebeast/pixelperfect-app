@@ -2,20 +2,19 @@
 import { ReactNode } from "react";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
-type LocaleLayoutProps = {
+type Props = {
   children: ReactNode;
   params: {
     locale: string;
   };
 };
 
-export default function LocaleLayout({ children, params }: LocaleLayoutProps) {
+export default function LocaleLayout({ children, params }: Props) {
   const messages = useMessages();
 
-  if (!messages) {
-    notFound();
-  }
+  if (!messages) notFound();
 
   return (
     <html lang={params.locale}>
@@ -26,4 +25,10 @@ export default function LocaleLayout({ children, params }: LocaleLayoutProps) {
       </body>
     </html>
   );
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  return {
+    title: `PixelPerfect (${params.locale})`,
+  };
 }
