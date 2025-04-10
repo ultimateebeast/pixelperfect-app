@@ -1,4 +1,7 @@
-// src/components/landing/PricingSection.tsx
+"use client";
+
+import { motion } from "framer-motion";
+
 const pricingPlans = [
   {
     name: "Free",
@@ -33,25 +36,39 @@ const pricingPlans = [
 
 export default function PricingSection() {
   return (
-    <section className="py-20 bg-blue-400">
+    <section className="py-20 bg-black text-white">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-10">Choose Your Plan</h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <motion.h2
+          className="text-4xl font-semibold mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}>
+          Choose Your Plan
+        </motion.h2>
+
+        <div className="grid gap-8 md:grid-cols-3">
           {pricingPlans.map((plan, index) => (
-            <div
+            <motion.div
               key={index}
-              className="border p-6 rounded-lg shadow-sm hover:shadow-md transition">
-              <h3 className="text-xl font-semibold mb-2">{plan.name}</h3>
-              <p className="text-3xl font-bold mb-4">{plan.price}</p>
-              <ul className="text-gray-600 mb-6 space-y-2">
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2, duration: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white/10 text-white border-2 border-white/20 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-transform">
+              <h3 className="text-2xl font-semibold mb-4">{plan.name}</h3>
+              <p className="text-4xl font-bold mb-6">{plan.price}</p>
+              <ul className="mb-8 space-y-4 text-left text-white/80">
                 {plan.features.map((feature, i) => (
-                  <li key={i}>✓ {feature}</li>
+                  <li key={i} className="flex items-center">
+                    <span className="mr-2">✓</span>
+                    {feature}
+                  </li>
                 ))}
               </ul>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300">
                 Get {plan.name}
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -1,23 +1,32 @@
 "use client";
-
-import Button from "@/components/ui/Button";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import StarBackground from "../ui/StarBackground";
 
 export default function HeroSection() {
   return (
-    <section className="text-center py-24 bg-gradient-to-b from-gray-400 to-blue-400">
-      <div className="max-w-3xl mx-auto px-4">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight tracking-tight">
-          Transform Your Figma Designs
+    <section className="relative h-screen bg-black text-white overflow-hidden flex items-center justify-center">
+      <StarBackground /> {/* Magical starry background */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="text-center px-4 relative z-10">
+        <h1 className="text-6xl sm:text-8xl font-extrabold tracking-tight mb-8">
+          PixelPerfect
         </h1>
-        <p className="text-lg sm:text-xl text-grey-600 mb-8">
-          PixelPerfect turns your Figma UI into clean, responsive code using
-          Next.js + Tailwind.
+        <p className="text-xl sm:text-3xl text-gray-300 font-semibold">
+          Where Figma meets Production.
         </p>
-        <Button>
-          <Link href="/landing">Get Started</Link>
-        </Button>
-      </div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="w-5 h-10 border-2 border-white rounded-full flex items-center justify-center">
+          <div className="w-1 h-3 bg-white animate-bounce rounded-full" />
+        </div>
+      </motion.div>
     </section>
   );
 }

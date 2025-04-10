@@ -19,10 +19,15 @@
   }
 }
 
-html,
-body {
-  min-height: 100vh;
-  background-color: #0f0f0f; /* or white if in light mode */
-  color: white; /* ensures your text is visible */
+html {
+  scroll-behavior: smooth;
 }
 
+body {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.hero-heading:hover {
+  transform: scale(1.05);
+  color: #ffd700; /* Or any other color */
+}

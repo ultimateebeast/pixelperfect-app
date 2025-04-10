@@ -1,6 +1,7 @@
-// src/components/landing/FaqSection.tsx
 "use client";
+
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -28,29 +29,56 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="py-20 bg-blue-400">
-      <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-10">
+    <motion.section
+      className="py-20 bg-black text-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ staggerChildren: 0.2 }}>
+      <div className="max-w-4xl mx-auto px-4">
+        <motion.h2
+          className="text-4xl font-semibold text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}>
           Frequently Asked Questions
-        </h2>
-        <div className="space-y-4">
+        </motion.h2>
+
+        <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div
+            <motion.div
               key={index}
-              className="border rounded-lg p-4 bg-blue shadow-sm transition hover:shadow-md">
+              className="border-2 rounded-xl p-6 bg-white/10 backdrop-blur-lg shadow-lg"
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}>
               <button
                 onClick={() => toggle(index)}
-                className="flex justify-between items-center w-full text-left font-medium text-lg">
+                className="flex justify-between items-center w-full text-left font-medium text-xl text-white">
                 <span>{faq.question}</span>
-                <span>{openIndex === index ? "−" : "+"}</span>
+                <motion.span
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}>
+                  {openIndex === index ? "−" : "+"}
+                </motion.span>
               </button>
-              {openIndex === index && (
-                <p className="mt-3 text-gray-600">{faq.answer}</p>
-              )}
-            </div>
+
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.p
+                    className="mt-4 text-lg text-white/90"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.4 }}>
+                    {faq.answer}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

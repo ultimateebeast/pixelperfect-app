@@ -1,4 +1,7 @@
-// src/components/landing/FeaturesSection.tsx
+"use client";
+
+import { motion } from "framer-motion";
+
 const features = [
   {
     title: "Pixel-Perfect Conversion",
@@ -14,22 +17,50 @@ const features = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  }),
+};
+
 export default function FeaturesSection() {
   return (
-    <section className="py-20 bg-blue-400">
+    <motion.section
+      className="py-20 bg-black text-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}>
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-10">Why PixelPerfect?</h2>
+        <motion.h2
+          className="text-4xl font-semibold mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}>
+          Why PixelPerfect?
+        </motion.h2>
+
         <div className="grid gap-8 md:grid-cols-3">
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
-              className="p-6 border rounded-lg shadow-sm hover:shadow-md transition">
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </div>
+              className="p-8 border-2 border-white/20 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-transform bg-white/10 backdrop-blur-lg"
+              variants={cardVariants}
+              custom={index}>
+              <h3 className="text-2xl font-semibold text-white mb-4">
+                {feature.title}
+              </h3>
+              <p className="text-lg text-white/90">{feature.description}</p>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
