@@ -11,13 +11,19 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
         className="text-center px-4 relative z-10">
-        <h1 className="text-6xl sm:text-8xl font-extrabold tracking-tight mb-8">
-          PixelPerfect
+        {/* Responsive, Adaptive Heading */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 break-words leading-tight max-w-[90vw] mx-auto">
+          <span className="block sm:inline">Pixel</span>
+          <span className="block sm:inline">Perfect</span>
         </h1>
-        <p className="text-xl sm:text-3xl text-gray-300 font-semibold">
+
+        {/* Subheading */}
+        <p className="text-lg sm:text-2xl md:text-3xl text-gray-300 font-semibold max-w-xl mx-auto">
           Where Figma meets Production.
         </p>
       </motion.div>
+
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

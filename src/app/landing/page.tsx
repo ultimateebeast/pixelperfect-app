@@ -28,7 +28,7 @@ export default function LandingPage() {
         <motion.section
           variants={stagger}
           initial="initial"
-          whileInView="animate"
+          animate="animate"
           className="min-h-[90vh] flex flex-col justify-center items-center text-center px-4 bg-black text-white">
           <motion.h1
             variants={fadeInUp}
