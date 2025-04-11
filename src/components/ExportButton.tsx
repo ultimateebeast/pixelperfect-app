@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useUserPlan } from "@/components/hooks/useUserPlan";
+import { useUserPlan } from "@/hooks/useUserPlan";
 import { hasAccess } from "@/utils/featureAccess";
 
 export default function ExportButton() {

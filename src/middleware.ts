@@ -5,9 +5,9 @@ import { NextResponse } from "next/server";
 export default authMiddleware({
   publicRoutes: [
     "/", // ✅ Public landing page
-    "/sign-in", // ✅ Needed for sign-in form
-    "/sign-up", // ✅ Sign-up form
-    "/forgot-password", // ✅ Optional (if using)
+    "/sign-in",
+    "/sign-up",
+    "/forgot-password",
   ],
 
   async afterAuth(auth, req) {
@@ -15,19 +15,21 @@ export default authMiddleware({
     const url = req.nextUrl;
     const pathname = url.pathname;
 
-    // ✅ Allow access to public routes if user not logged in
+    // ✅ Allow access to public routes if not signed in
     if (!userId && isPublicRoute) return NextResponse.next();
 
-    // 🔐 Redirect unauthenticated users trying to access protected routes
+    // 🔐 Redirect unauthenticated users from protected routes
     if (!userId && !isPublicRoute) {
       return NextResponse.redirect(new URL("/sign-in", req.url));
     }
 
-    // ✅ At this point, user is authenticated
-    const user = await clerkClient.users.getUser(userId);
-    const plan = user.publicMetadata?.plan ?? "free";
+    // ✅ User is authenticated here — fetch user
+    const user = await clerkClient.users.getUser(userId as string);
 
-    // ⛔ Free users blocked from /pro-tools
+    // ✅ Fix: Safely extract `plan` as string
+    const plan = (user.publicMetadata?.plan as string) ?? "free";
+
+    // ⛔ Block free users from /pro-tools
     if (pathname.startsWith("/pro-tools") && plan === "free") {
       return NextResponse.redirect(new URL("/upgrade", req.url));
     }
@@ -40,15 +42,14 @@ export default authMiddleware({
       return NextResponse.redirect(new URL("/upgrade", req.url));
     }
 
-    // ✅ All good
     return NextResponse.next();
   },
 });
 
-// 🛡️ Apply to all routes except static files and API
+// ✅ Applies to all routes except static, api, favicon
 export const config = {
   matcher: [
-    "/((?!_next|.*\\..*|api|favicon.ico).*)", // All routes except _next, static, api, favicon
-    "/(en|hi)/((?!_next|.*\\..*|api|favicon.ico).*)", // For i18n (optional)
+    "/((?!_next|.*\\..*|api|favicon.ico).*)",
+    "/(en|hi)/((?!_next|.*\\..*|api|favicon.ico).*)",
   ],
 };
